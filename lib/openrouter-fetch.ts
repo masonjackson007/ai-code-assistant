@@ -1,4 +1,4 @@
-import { Agent, fetch as undiciFetch } from 'undici';
+import { Agent, fetch as undiciFetch, type RequestInit as UndiciRequestInit } from 'undici';
 
 /**
  * Optional dev-only fetch for networks that intercept HTTPS with a corporate CA
@@ -23,9 +23,16 @@ export function createOpenRouterFetch(): typeof fetch | undefined {
     },
   });
 
-  return ((input, init) =>
-    undiciFetch(input, {
-      ...init,
+  const fetchWithAgent = async (
+    input: RequestInfo | URL,
+    init?: RequestInit,
+  ): Promise<Response> => {
+    const response = await undiciFetch(input as string | URL, {
+      ...(init as UndiciRequestInit),
       dispatcher: agent,
-    })) as typeof fetch;
+    });
+    return response as unknown as Response;
+  };
+
+  return fetchWithAgent as typeof fetch;
 }

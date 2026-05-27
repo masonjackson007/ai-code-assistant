@@ -1,9 +1,11 @@
 import { streamText, UIMessage, convertToModelMessages } from 'ai';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { analyzeCodeBugs } from '@/lib/tools';
+import { createOpenRouterFetch } from '@/lib/openrouter-fetch';
 
 const openrouter = createOpenRouter({
   apiKey: process.env.OPENROUTER_API_KEY,
+  fetch: createOpenRouterFetch(),
 });
 
 const systemPrompt = `You are a code analysis assistant. When the user shares code or asks you to review code for bugs, carefully inspect it for syntax errors, logic bugs, memory leaks, resource leaks, race conditions, and common anti-patterns.
