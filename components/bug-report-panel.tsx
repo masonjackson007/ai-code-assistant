@@ -1,3 +1,4 @@
+import { CodeBlock } from '@/components/code-block';
 import type { AnalyzeCodeBugsResult, BugReport } from '@/lib/tools';
 
 type BugReportPanelProps = {
@@ -34,9 +35,7 @@ function BugItem({ bug }: { bug: BugReport }) {
           </p>
         </div>
       </div>
-      <pre className="overflow-x-auto bg-zinc-950 px-4 py-3 text-sm text-emerald-300 font-mono">
-        <code>{bug.fix}</code>
-      </pre>
+      <CodeBlock code={bug.fix} language={bug.language} />
     </li>
   );
 }

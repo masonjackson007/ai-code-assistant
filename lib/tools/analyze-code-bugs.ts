@@ -6,6 +6,9 @@ export const bugReportSchema = z.object({
   severity: z.enum(['error', 'warning']),
   message: z.string().describe('Explanation of the bug'),
   fix: z.string().describe('The corrected code snippet'),
+  language: z
+    .enum(['typescript', 'python', 'rust'])
+    .describe('Programming language of the code snippet'),
 });
 
 export const analyzeCodeBugsInputSchema = z.object({

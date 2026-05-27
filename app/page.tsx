@@ -4,6 +4,7 @@ import { useChat } from '@ai-sdk/react';
 import { isToolUIPart } from 'ai';
 import { useState } from 'react';
 import { BugReportPanel } from '@/components/bug-report-panel';
+import { MarkdownContent } from '@/components/markdown-content';
 import type { AnalyzeCodeBugsResult } from '@/lib/tools';
 
 export default function Chat() {
@@ -21,9 +22,11 @@ export default function Chat() {
             switch (part.type) {
               case 'text':
                 return (
-                  <div key={`${message.id}-${i}`} className="text-sm leading-6">
-                    {part.text}
-                  </div>
+                  <MarkdownContent
+                    key={`${message.id}-${i}`}
+                    className="text-sm leading-6"
+                    content={part.text}
+                  />
                 );
               default:
                 if (

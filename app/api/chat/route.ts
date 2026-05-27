@@ -15,6 +15,7 @@ Always respond by calling the analyzeCodeBugs tool with your findings. For each 
 - severity: "error" for bugs that will break execution or cause data loss, "warning" for potential issues or code smells
 - A clear explanation of the bug
 - A corrected code snippet showing the fix
+- language: one of "typescript", "python", or "rust" matching the code being reviewed
 
 If no issues are found, call analyzeCodeBugs with an empty bugs array.`;
 
